@@ -15,11 +15,6 @@ export class HeroesComponent implements OnInit {
     this.selectedHero = hero;
   }
 
-  hero:Hero={
-    id:1,
-    name: "Luke Skywalker"
-  };
-
   constructor() {
 
 
