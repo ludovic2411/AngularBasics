@@ -37,6 +37,13 @@ export class HeroService {
     return this.http.post<Hero>(this.heroesUrl, hero, httpOptions);
   }
 
+  /** DELETE: delete the hero from the server */
+  deleteHero (hero: Hero | number): Observable<Hero> {
+    const id = typeof hero === 'number' ? hero : hero.id;
+    const url = `${this.heroesUrl}/${id}`;
+    return this.http.delete<Hero>(url, httpOptions);
+  }
+
   constructor(private messageService: MessageService,
   private http: HttpClient) { }
 }
