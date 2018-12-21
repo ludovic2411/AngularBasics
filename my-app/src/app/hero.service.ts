@@ -5,10 +5,15 @@ import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class HeroService {
+
 
   private heroesUrl = 'api/heroes';  // URL to web api
 
@@ -20,7 +25,12 @@ export class HeroService {
   getHero(id: number): Observable<Hero> {
   const url = `${this.heroesUrl}/${id}`;
   return this.http.get<Hero>(url)
-  } 
+  }
+
+  /** PUT: update the hero on the server */
+  updateHero (hero: Hero): Observable<any> {
+  return this.http.put(this.heroesUrl, hero, httpOptions);
+  }
 
   constructor(private messageService: MessageService,
   private http: HttpClient) { }
