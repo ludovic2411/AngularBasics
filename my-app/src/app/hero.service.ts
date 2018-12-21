@@ -23,13 +23,18 @@ export class HeroService {
   }
 
   getHero(id: number): Observable<Hero> {
-  const url = `${this.heroesUrl}/${id}`;
-  return this.http.get<Hero>(url)
+    const url = `${this.heroesUrl}/${id}`;
+    return this.http.get<Hero>(url)
   }
 
   /** PUT: update the hero on the server */
   updateHero (hero: Hero): Observable<any> {
-  return this.http.put(this.heroesUrl, hero, httpOptions);
+    return this.http.put(this.heroesUrl, hero, httpOptions);
+  }
+
+  /** POST: add a new hero to the server */
+  addHero (hero: Hero): Observable<Hero> {
+    return this.http.post<Hero>(this.heroesUrl, hero, httpOptions);
   }
 
   constructor(private messageService: MessageService,
